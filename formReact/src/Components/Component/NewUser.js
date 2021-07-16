@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
-
+import Card from '../UI/Card';
+import Button from '../UI/Button';
+import styles from './NewUser.module.css'
 const NewUser =()=>{
   const [enteredUsername,setUsername]=useState('');
   const [enteredAge,setAge]=useState('');
@@ -13,17 +15,33 @@ const NewUser =()=>{
     }
     const onSubmitHandler =(event)=>{
         event.preventDefault();
-        console.log(enteredAge,enteredUsername);
+        if(enteredUsername.trim().length===0 || enteredAge.trim().length===0){
+            return;
+        }
+        if(enteredAge < 1){
+            return;
+        }
+        const newUser ={
+            userName:enteredUsername,
+            userAge:enteredAge
+        }
+        console.log(newUser)
+        setUsername('');
+        setAge('');
     }
     return (
-        <form onSubmit={onSubmitHandler}>
+        <Card className={styles.input} >
+         <form onSubmit={onSubmitHandler}>
             <label>Username</label>
-            <input onChange={onChangeUser} type="text"/>
+            <input value={enteredUsername} onChange={onChangeUser} type="text"/>
             <label>Age</label>
-            <input onChange={onChangeAge} type="number"/>
+            <input value={enteredAge} onChange={onChangeAge} type="number"/>
 
-            <button type="submit">Add User</button>
+            <Button type="sumbit"/>
         </form>
+
+        </Card>
+       
     )
 
 }
