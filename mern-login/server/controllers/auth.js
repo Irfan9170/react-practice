@@ -1,5 +1,5 @@
 const User = require('../models/User.js')
-
+const jwt = require('jsonwebtoken')
 exports.register=async (req,res)=>{
     const {email,password}=req.body;
     try{
@@ -51,10 +51,15 @@ exports.login=async (req,res)=>{
             "err" :"Invalid"
         })
     }
-       res.status(200).json({
-           success:true,
-           token:"hkfkd"
-       })
+    const token = jwt.sign({ id: user._id }, "thisismysecreatkeywithiwilhavetoken");
+    console.log("token",token);
+    res.json({
+      token,
+      user: {
+        id: user._id,
+        
+      },
+    });
    
   } catch (err) {
    res.status(404).json({
@@ -62,8 +67,23 @@ exports.login=async (req,res)=>{
        error:err.message
    })
   }
-}
-
+};
+exports.valid =async (req, res) => {
+    try {
+      const token = req.header("x-auth-token");
+      if (!token) return res.json(false);
+  
+      const verified = jwt.verify(token, "thisismysecreatkeywithiwilhavetoken");
+      if (!verified) return res.json(false);
+  
+      const user = await User.findById(verified.id);
+      if (!user) return res.json(false);
+  
+      return res.json(true);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  };
 exports.forgetPassword=(req,res)=>{
     res.send("Forget route")
 }
