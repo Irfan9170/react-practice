@@ -3,15 +3,22 @@ const jwt = require('jsonwebtoken')
 exports.register=async (req,res)=>{
     const {email,password}=req.body;
     try{
-     const user = await User.create({
-         email,
-         password
-     });
 
-     res.status(201).json({
-        suceess : true,
+      const user = await User.create({
+        email,
+        password,
+        
+      });
+      const token = jwt.sign({ id: user._id }, "thisismysecreatkeywithiwilhavetoken");
+      console.log("token",token);
+
+     res.json({
+       token,
+       user: {
         user
-     })
+         
+       },
+     });
     } catch(err){
 res.status(400).json({
     suceess:"failed",

@@ -19,6 +19,9 @@ const UserSchema = new mongoose.Schema({
     minlength: 6,
     select: false,
   },
+  token :{
+    type:String
+  }
  
 });
 
