@@ -1,10 +1,9 @@
 import React from 'react';
-
+import Button from './UI/Button'
 const ShowProperty = (props) => {
-	const onDeleteHandler=(props)=>{
-        console.log("Deleted")
-        console.log(props.id);
-    }
+	// const deleteHandler=(id)=>{
+	// 	props.onDelete(id);
+	// }
 	return (
 		<table>
 			<tr>
@@ -17,7 +16,7 @@ const ShowProperty = (props) => {
 				<td>{property.name} </td>
 				<td> {property.description}</td>
 				<td>{property.size} </td>
-                <td><button  id ={property.id}onClick={onDeleteHandler}> Delete </button></td>
+                <td><Button id={property.id} onDelete={props.onDelete} type="button">Delete </Button></td>
 			</tr>
            })}
 			

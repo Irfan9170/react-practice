@@ -34,7 +34,12 @@ function App() {
     })
 
   };
-  
+  const onDeleteHandler=(id)=>{
+   console.log(id)
+  setproperties( prev =>{
+    const properties= prev.filter(property => property.id !== id);
+    return properties
+  })};
   return (
     <div>
         <h1>Property Management</h1>
@@ -42,7 +47,7 @@ function App() {
         {/* {properties.map((property)=>{
            return <ShowProperty key={property.id} name={property.name} description={property.description} size={property.size} />
         })} */}
-        <ShowProperty properties={properties}/>
+        <ShowProperty onDelete={onDeleteHandler} properties={properties}/>
         
     </div>
   );
