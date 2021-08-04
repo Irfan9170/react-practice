@@ -17,7 +17,7 @@ const AddProperty=(props)=>{
     const onSubmitHandler=(event)=>{
                event.preventDefault();
                const property = {
-                   id:Math.random().toString(),
+                //    id:Math.random().toString(),
                    name : name,
                    description:description,
                    size:size

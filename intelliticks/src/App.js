@@ -1,6 +1,7 @@
 import ShowProperty from './components/ShowProperty';
 import AddProperty from './components/AddProperty';
-import {React,useState} from 'react';
+import {React,useState,useEffect} from 'react';
+import Airtable from 'airtable';
 import './App.css';
 const DUMMY_DATA = [
   {
@@ -23,23 +24,43 @@ const DUMMY_DATA = [
   },
   
 ];
-
+const base = new Airtable({apiKey:"keyYpfaKayLIEZb9i"}).base('appVT3Cj4myFwsAGC');
 function App() {
 
-  const [properties,setproperties]=useState(DUMMY_DATA);
-  
+  const [properties,setproperties]=useState([]);
+  useEffect(()=>{
+    base("property").select().eachPage((records,fetchNextPage)=>{
+      console.log(records);
+      setproperties(records)
+      fetchNextPage();
+    })
+  },[]);
   const onAddProperty=(property)=>{
-    setproperties(prevProperties =>{
-      return [property,...prevProperties]
+    console.log(property)
+    base("property").create({...property},(err,records)=>{
+      if(err){
+        console.log(err)
+        return
+      }
+      
     })
 
   };
   const onDeleteHandler=(id)=>{
    console.log(id)
-  setproperties( prev =>{
-    const properties= prev.filter(property => property.id !== id);
-    return properties
-  })};
+   base('property').destroy([id], (err, deletedRecords) =>{
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log('Deleted', deletedRecords.length, 'records');
+  });
+  // setproperties( prev =>{
+  //   const properties= prev.filter(property => property.id !== id);
+  //   return properties
+  // })
+
+};
   return (
     <div>
         <h1>Property Management</h1>

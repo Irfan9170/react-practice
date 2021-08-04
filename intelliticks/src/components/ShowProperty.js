@@ -4,6 +4,9 @@ const ShowProperty = (props) => {
 	// const deleteHandler=(id)=>{
 	// 	props.onDelete(id);
 	// }
+	// {props.properties.map((property)=>{
+	// 	console.log(property.fields.name)
+	// })}
 	return (
 		<table>
 			<tr>
@@ -12,10 +15,10 @@ const ShowProperty = (props) => {
                 <th>Size</th>
 			</tr>
            {props.properties.map((property)=>{
-              return  <tr key={property.id}>
-				<td>{property.name} </td>
-				<td> {property.description}</td>
-				<td>{property.size} </td>
+              return  <tr key={property.fields.id}>
+				<td>{property.fields.name} </td>
+				<td> {property.fields.description}</td>
+				<td>{property.fields.size} </td>
                 <td><Button id={property.id} onDelete={props.onDelete} type="button">Delete </Button></td>
 			</tr>
            })}
