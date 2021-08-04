@@ -36,13 +36,16 @@ function App() {
     })
   },[]);
   const onAddProperty=(property)=>{
-    console.log(property)
+    // console.log(property)
     base("property").create({...property},(err,records)=>{
       if(err){
         console.log(err)
         return
       }
-      
+      setproperties( prev =>{
+        const properties= [...prev,records];
+        return properties
+      })
     })
 
   };
@@ -53,7 +56,8 @@ function App() {
       console.error(err);
       return;
     }
-    console.log('Deleted', deletedRecords.length, 'records');
+    // setproperties(properties)
+    console.log('Deleted', deletedRecords, 'records');
   });
   // setproperties( prev =>{
   //   const properties= prev.filter(property => property.id !== id);
