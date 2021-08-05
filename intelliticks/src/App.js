@@ -3,6 +3,7 @@ import AddProperty from './components/AddProperty';
 import {React,useState,useEffect} from 'react';
 import Airtable from 'airtable';
 import './App.css';
+// import Button from './components/UI/Button';
 const DUMMY_DATA = [
   {
     id: 'e1',
@@ -65,6 +66,19 @@ function App() {
   // })
 
 };
+const onClickHandler=()=>{
+  //  console.log(properties);
+   
+   const sortProp=properties.sort((a,b)=> {
+     
+     return b.fields.size - a.fields.size;
+   })
+
+   setproperties(prev=>{
+     const newProp = [...sortProp]
+     return newProp;
+   });
+}
   return (
     <div>
         <h1>Property Management</h1>
@@ -72,6 +86,7 @@ function App() {
         {/* {properties.map((property)=>{
            return <ShowProperty key={property.id} name={property.name} description={property.description} size={property.size} />
         })} */}
+        <button onClick={onClickHandler}>Sort</button>
         <ShowProperty onDelete={onDeleteHandler} properties={properties}/>
         
     </div>
