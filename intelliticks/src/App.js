@@ -69,11 +69,12 @@ function App() {
 const onClickHandler=()=>{
   //  console.log(properties);
    
-   const sortProp=properties.sort((a,b)=> {
+   
+  const sortProp=properties.sort((a,b)=> {
      
-     return b.fields.size - a.fields.size;
-   })
-
+    return a.fields.size - b.fields.size;
+  }) 
+ 
    setproperties(prev=>{
      const newProp = [...sortProp]
      return newProp;
