@@ -1,3 +1,4 @@
+import Add from './Add'
 import classes from './ShowItem.module.css'
 const ShowItem = props =>{
     return (
@@ -15,7 +16,7 @@ const ShowItem = props =>{
               </div>
 
               <div>
-
+                  <Add />
               </div>
           </li>
     )
