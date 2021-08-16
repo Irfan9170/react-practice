@@ -3,7 +3,7 @@ import Modal from '../../components/UI/Modal'
 import classes from './CardList.module.css';
 const CardList = props =>{
     return (
-       <Modal>
+       <Modal onClose ={props.onClose}>
                 <ul className={classes['card-items']}>
                     {[{id:'c1',name:'Sushi' , Quantity : 2, price:21}].map(item=>{
                         return <li>{item.name}</li>
@@ -14,7 +14,7 @@ const CardList = props =>{
                     <span>Rs 32.0</span>
                 </div>
                 <div className={classes.actions}>
-                    <button className={classes['button--alt']}>Close</button>
+                    <button  onClick={props.onClose} className={classes['button--alt']}>Close</button>
                     <button className={classes.button}>Order</button>
                 </div>
        </Modal>
