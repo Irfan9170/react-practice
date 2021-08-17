@@ -1,6 +1,18 @@
 import Add from './Add'
-import classes from './ShowItem.module.css'
+import classes from './ShowItem.module.css';
+import {useContext} from 'react';
+import CartContext from '../../store/CartContext'
 const ShowItem = props =>{
+    const cartctx = useContext(CartContext);
+   const onAddCartHandler = (amount)=>{
+       console.log(amount)
+         cartctx.addItem({
+             id:props.id,
+             name:props.name,
+             amount:props.amount,
+             price:props.price
+         })
+   }    
     return (
           <li className={classes.meal}>
               <div>
@@ -16,7 +28,7 @@ const ShowItem = props =>{
               </div>
 
               <div>
-                  <Add />
+                  <Add onAddCartHandler={onAddCartHandler} />
               </div>
           </li>
     )

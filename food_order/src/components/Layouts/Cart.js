@@ -3,6 +3,7 @@ import {useContext} from 'react';
 import CartContext from '../../store/CartContext';
 const Cart = props =>{
     const cartCtx=useContext(CartContext);
+    console.log(cartCtx)
     const numberOfCart = cartCtx.items.reduce((currentValue,item)=>{
         return currentValue + item.amount;
     },0);
