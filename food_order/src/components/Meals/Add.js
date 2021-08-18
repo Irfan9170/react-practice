@@ -1,24 +1,15 @@
 import Input from '../UI/Input';
 import classes from './Add.module.css';
-import {useRef,useState} from 'react';
+import {useRef} from 'react';
 const Add = props =>{
     const amountInput = useRef();
-    const [amountIsValid, setAmountIsValid] = useState(true);
      const onSubmitHandler=(event)=>{
-         
                 event.preventDefault();
-                const enteredAmount = amountInput.current.value;
-                const enteredAmountNumber = +enteredAmount;
-                // console.log(enteredAmountValueNumber,enteredAmountValue)
-                if (
-                    enteredAmount.trim().length === 0 ||
-                    enteredAmountNumber < 1 ||
-                    enteredAmountNumber > 5
-                  ) {
-                    setAmountIsValid(false);
-                    return;
-                  }
-                props.onAddCartHandler(enteredAmountNumber);
+                const enteredAmountValue = amountInput.current.value;
+                const enteredAmountValueNumber = +enteredAmountValue;
+                console.log(enteredAmountValueNumber,enteredAmountValue)
+                
+                props.onAddCartHandler(enteredAmountValueNumber);
 
 
      }
